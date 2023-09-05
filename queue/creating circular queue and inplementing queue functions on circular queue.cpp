@@ -31,7 +31,7 @@ int dequeue(struct queue *q)
     else
     {
         q->front=(q->front+1)%q->size;
-        x=q->front;
+        x=q->Q[q->front];
     }
     return x;
 }
