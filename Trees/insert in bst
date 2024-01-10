@@ -74,7 +74,7 @@ void preorder(node *p) {
 }
 int main()
 {
-    rinsert(root,10);
+   root= rinsert(root,10);
     rinsert(root,20);
     rinsert(root,5);
     preorder(root);
