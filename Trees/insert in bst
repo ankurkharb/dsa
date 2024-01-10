@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    node *lchild;
+    int data;
+    node *rchild;
+}*root=NULL;
+void insert(int key)
+{
+    struct node *p=root;
+    node *t,*r=NULL;
+    if(root==NULL)
+    {
+        t=new node;
+        t->data=key;
+        t->rchild=t->lchild=NULL;
+        root=t;
+        return;
+    }
+    while(p!=NULL)
+    {
+        r=p;
+        if(key<p->data)
+            p=p->lchild;
+        else if(key>p->data)
+            p=p->rchild;
+        else
+            return;
+    }
+    t=new node;
+    t->data=key;
+    t->rchild=t->lchild=NULL;
+    if(key<r->data)
+        r->lchild=t;
+    else if(key>r->data) {
+        r->rchild = t;
+    }
+}
+node * rinsert(node *p,int key)
+{
+    struct node *t=NULL;
+    if(p==NULL)
+    {
+        t=new node;
+        t->data=key;
+        t->rchild=t->lchild=NULL;
+        return t;
+    }
+    if(key<p->data)
+    {
+        p->lchild= rinsert(p->lchild,key);
+    }
+    else if(key > p->data)
+    {
+        p->rchild= rinsert(p->rchild,key);
+    }
+    return p;
+}
+void inorder(node *p)
+{
+    while(p!=NULL) {
+        inorder(p->lchild);
+        cout << p->data<<" ";
+        inorder(p->rchild);
+    }
+}
+void preorder(node *p) {
+    if (p) {
+        cout << p->data;
+        preorder(p->lchild);
+        preorder(p->rchild);
+    }
+}
+int main()
+{
+    rinsert(root,10);
+    rinsert(root,20);
+    rinsert(root,5);
+    preorder(root);
+}
